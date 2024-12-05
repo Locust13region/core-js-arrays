@@ -21,8 +21,12 @@
  *    getIntervalArray(3, 3) => [ 3 ]
  */
 
-const getIntervalArray = (start, end) =>
-  [...Array(end - start ? end - start + 1 : 1)].map((i, idx) => start + idx);
+const getIntervalArray = (start, end) => {
+  return Array.from(
+    { length: end - start ? end - start + 1 : 1 },
+    (i, idx) => start + idx
+  );
+};
 
 /**
  * Returns a new array where each element is the sum of the corresponding elements
@@ -51,7 +55,9 @@ const sumArrays = (arr1, arr2) =>
  *    findElement(['Array', 'Number', 'string'], 'Date') => -1
  *    findElement([0, 1, 2, 3, 4, 5], 5) => 5
  */
-const findElement = (arr, value) => arr.indexOf(value);
+const findElement = (arr, value) => {
+  return arr.indexOf(value);
+};
 
 /**
  * Returns a number of all occurrences of the specified item in an array.
@@ -81,7 +87,9 @@ const findAllOccurrences = (arr, item) => arr.filter((i) => i === item).length;
  *    removeFalsyValues([ 1, 2, 3, 4, 5, 'false' ]) => [ 1, 2, 3, 4, 5, 'false' ]
  *    removeFalsyValues([ false, 0, NaN, '', undefined ]) => [ ]
  */
-const removeFalsyValues = (arr) => arr.filter((i) => !!i !== false);
+const removeFalsyValues = (arr) => {
+  return arr.filter((i) => !!i !== false);
+};
 
 /**
  * Returns an array containing the lengths of each string in a specified array of strings.
@@ -93,7 +101,9 @@ const removeFalsyValues = (arr) => arr.filter((i) => !!i !== false);
  *    getStringsLength([ '', 'a', 'bc', 'def', 'ghij' ]) => [ 0, 1, 2, 3, 4 ]
  *    getStringsLength([ 'angular', 'react', 'ember' ]) => [ 7, 5, 5 ]
  */
-const getStringsLength = (arr) => arr.map((i) => i.length);
+const getStringsLength = (arr) => {
+  return arr.map((i) => i.length);
+};
 
 /**
  * Returns the average of all items in the specified array of numbers.
@@ -109,12 +119,13 @@ const getStringsLength = (arr) => arr.map((i) => i.length);
  *   getAverage([ 1, 10, 100, 1000 ])  => 277,75
  *   getAverage([ 2, 3, 3 ])  => 2,67
  */
-const getAverage = (arr) =>
-  arr.length === 0
+const getAverage = (arr) => {
+  return arr.length === 0
     ? 0
     : Math.round(
         (arr.reduce((acc, curr) => acc + curr, 0) / arr.length) * 100
       ) / 100;
+};
 
 /**
  * Checks if all strings in an array have the same length.
@@ -126,7 +137,9 @@ const getAverage = (arr) =>
  *    isSameLength(['orange', 'banana', 'cherry']) => true
  *    isSameLength(['cat', 'dog', 'elephant']) => false
  */
-const isSameLength = (arr) => arr.every((i) => i.length === arr[0].length);
+const isSameLength = (arr) => {
+  return arr.every((i) => i.length === arr[0].length);
+};
 /**
  * Checks if there are elements in the array where the value is equal to its index.
  *
@@ -138,8 +151,9 @@ const isSameLength = (arr) => arr.every((i) => i.length === arr[0].length);
  *    isValueEqualsIndex([2, 1, 0, 4, 5]) => true
  *    isValueEqualsIndex([10, 20, 30, 40, 50]) => false
  */
-const isValueEqualsIndex = (arr) => arr.some((i, idx) => i === idx);
-
+const isValueEqualsIndex = (arr) => {
+  return arr.some((i, idx) => i === idx);
+};
 /**
  * Inserts the item into specified array at specified index.
  *
@@ -151,7 +165,9 @@ const isValueEqualsIndex = (arr) => arr.some((i, idx) => i === idx);
  *    insertItem([ 1, 3, 4, 5 ], 2, 1)  => [ 1, 2, 3, 4, 5 ]
  *    insertItem([ 1, 'b', 'c'], 'x', 0) => [ 'x', 1, 'b', 'c' ]
  */
-const insertItem = (arr, item, index) => arr.splice(index, 0, item);
+const insertItem = (arr, item, index) => {
+  return arr.splice(index, 0, item);
+};
 
 /**
  * Returns the n first items of the specified array.
@@ -164,7 +180,9 @@ const insertItem = (arr, item, index) => arr.splice(index, 0, item);
  *    getHead([ 'a', 'b', 'c', 'd'], 3) => [ 'a', 'b', 'c' ]
  *    getHead([ 'a', 'b', 'c', 'd'], 0) => []
  */
-const getHead = (arr, n) => arr.slice(0, n);
+const getHead = (arr, n) => {
+  return arr.slice(0, n);
+};
 
 /**
  * Returns the n last items of the specified array.
@@ -190,7 +208,9 @@ const getTail = (arr, n) => (n === 0 ? [] : arr.slice(-n));
  *    doubleArray([0, 1, 2, 3, 4, 5]) => [0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5]
  *    doubleArray([]) => []
  */
-const doubleArray = (arr) => arr.concat(arr);
+const doubleArray = (arr) => {
+  return arr.concat(arr);
+};
 
 /**
  * Concatenates all elements from specified array into single string with ',' delimiter.
@@ -203,7 +223,9 @@ const doubleArray = (arr) => arr.concat(arr);
  *    toStringList([1, 2, 3, 4, 5]) => '1,2,3,4,5'
  *    toStringList(['rock', 'paper', 'scissors']) => 'rock,paper,scissors'
  */
-const toStringList = (arr) => arr.join(',');
+const toStringList = (arr) => {
+  return arr.join(',');
+};
 
 /**
  * Returns array containing only unique values from the specified array.
@@ -217,7 +239,9 @@ const toStringList = (arr) => arr.join(',');
  *   distinct([ 1, 1, 2, 2, 3, 3, 4, 4]) => [ 1, 2, 3, 4]
  *   distinct([]) => []
  */
-const distinct = (arr) => Array.from(new Set(arr));
+const distinct = (arr) => {
+  return Array.from(new Set(arr));
+};
 
 /**
  * Creates an n-dimensional array and fills it with zeros.
@@ -232,12 +256,13 @@ const distinct = (arr) => Array.from(new Set(arr));
  *    createNDimensionalArray(4, 2) => [[[[0, 0], [0, 0]], [[0, 0], [0, 0]]], [[[0, 0], [0, 0]], [[0, 0], [0, 0]]]]
  *    createNDimensionalArray(1, 1) => [0]
  */
-const createNDimensionalArray = (n, size) =>
-  n === 1
+const createNDimensionalArray = (n, size) => {
+  return n === 1
     ? Array(size).fill(0)
     : Array(size)
         .fill(null)
         .map(() => createNDimensionalArray(n - 1, size));
+};
 
 /**
  * Flattens a nested array into a single-level array.
@@ -250,7 +275,9 @@ const createNDimensionalArray = (n, size) =>
  *    flattenArray(['a', ['b', ['c', 'd'], 'e'], 'f']) => ['a', 'b', 'c', 'd', 'e', 'f']
  *    flattenArray([1, 2, 3, 4]) => [1, 2, 3, 4]
  */
-const flattenArray = (nestedArray) => nestedArray.flat(Infinity);
+const flattenArray = (nestedArray) => {
+  return nestedArray.flat(Infinity);
+};
 
 /**
  * Projects each element of the specified array to a sequence
@@ -265,7 +292,9 @@ const flattenArray = (nestedArray) => nestedArray.flat(Infinity);
  *   selectMany([[1, 2], [3, 4], [5, 6]], (x) => x) =>   [ 1, 2, 3, 4, 5, 6 ]
  *   selectMany(['one','two','three'], (x) => x.split('')) =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-const selectMany = (arr, func) => arr.flatMap(func);
+const selectMany = (arr, func) => {
+  return arr.flatMap(func);
+};
 
 /**
  * Every month, you record your income and expenses.
