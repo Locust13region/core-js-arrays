@@ -220,7 +220,7 @@ const toStringList = (arr) => arr.join(',');
 const distinct = (arr) => Array.from(new Set(arr));
 
 /**
- * Creates an n-dimensional array and fills it with zeros. /////////////////////////////////////////////////////////////////////////////////////////@param
+ * Creates an n-dimensional array and fills it with zeros.
  *
  * @param {number} n - Depth of outter array (n > 0).
  * @param {number} size - Length of all arrays (size > 0).
@@ -232,9 +232,12 @@ const distinct = (arr) => Array.from(new Set(arr));
  *    createNDimensionalArray(4, 2) => [[[[0, 0], [0, 0]], [[0, 0], [0, 0]]], [[[0, 0], [0, 0]], [[0, 0], [0, 0]]]]
  *    createNDimensionalArray(1, 1) => [0]
  */
-function createNDimensionalArray(/* n, size */) {
-  throw new Error('Not implemented');
-}
+const createNDimensionalArray = (n, size) =>
+  n === 1
+    ? Array(size).fill(0)
+    : Array(size)
+        .fill(null)
+        .map(() => createNDimensionalArray(n - 1, size));
 
 /**
  * Flattens a nested array into a single-level array.
@@ -281,7 +284,7 @@ const calculateBalance = (arr) =>
   arr.reduce((acc, sub) => acc + (sub[0] - sub[1]), 0);
 
 /**
- * Breaks an array into chunks of the specified size.  /////////////////////////////////////////////////////////////////////////////////////////@param
+ * Breaks an array into chunks of the specified size.
  *
  * @param {array} arr - The array to be broken into chunks.
  * @param {number} chunkSize - The size of each chunk.
@@ -292,9 +295,10 @@ const calculateBalance = (arr) =>
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
-}
+const createChunks = (arr, chunkSize) =>
+  [...Array(Math.ceil(arr.length / chunkSize))].map((i, idx) =>
+    arr.slice(idx * chunkSize, (idx + 1) * chunkSize)
+  );
 
 /**
  * Generates an array of odd numbers of the specified length.
@@ -456,9 +460,8 @@ const findLongestIncreasingSubsequence = (nums) =>
  *  propagateItemsByPositionIndex([ 'a', 'b', 'c', null ]) => [ 'a', 'b', 'b', 'c', 'c', 'c',  null, null, null, null ]
  *  propagateItemsByPositionIndex([ 1,2,3,4,5 ]) => [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
-}
+const propagateItemsByPositionIndex = (arr) =>
+  arr.map((i, idx) => [...Array(idx + 1)].fill(i)).flat(1);
 
 /**
  * Shifts an array by n positions. If n is negative, the array is shifted to the left;
@@ -473,9 +476,7 @@ function propagateItemsByPositionIndex(/* arr */) {
  *    shiftArray(['a', 'b', 'c', 'd'], -1) => ['b', 'c', 'd', 'a']
  *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
  */
-function shiftArray(/* arr, n */) {
-  throw new Error('Not implemented');
-}
+const shiftArray = (arr, n) => [].concat(arr.slice(-n), arr.slice(0, -n));
 
 /**
  * Sorts digit names.
@@ -490,10 +491,45 @@ function shiftArray(/* arr, n */) {
  *   sortDigitNamesByNumericOrder([ 'nine','eight','nine','eight' ]) => [ 'eight','eight','nine','nine']
  *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
-}
+const sortDigitNamesByNumericOrder = (arr) =>
+  arr
+    .map(
+      (i) =>
+        ({
+          zero: 0,
+          one: 1,
+          two: 2,
+          three: 3,
+          four: 4,
+          five: 5,
+          six: 6,
+          seven: 7,
+          eight: 8,
+          nine: 9,
+        })[i]
+    )
+    .sort((a, b) => a - b)
+    .map(
+      (i) =>
+        [
+          'zero',
+          'one',
+          'two',
+          'three',
+          'four',
+          'five',
+          'six',
+          'seven',
+          'eight',
+          'nine',
+        ][i]
+    );
 
+// console.log(sortDigitNamesByNumericOrder([]));
+// console.log(sortDigitNamesByNumericOrder(['nine', 'one']));
+// console.log(sortDigitNamesByNumericOrder(['one', 'two', 'three']));
+// console.log(sortDigitNamesByNumericOrder(['nine', 'eight', 'nine', 'eight']));
+// console.log(sortDigitNamesByNumericOrder(['one', 'one', 'one', 'zero']));
 /**
  * Swaps the head and tail of the specified array:
  * the head (first half) of array move to the end, the tail (last half) move to the start.
@@ -513,9 +549,14 @@ function sortDigitNamesByNumericOrder(/* arr */) {
  *   swapHeadAndTail([]) => []
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
-}
+const swapHeadAndTail = (arr) =>
+  [].concat(
+    arr.slice(arr.length - Math.floor(arr.length / 2)),
+    arr.length % 2 !== 0
+      ? arr.slice(Math.floor(arr.length / 2), Math.floor(arr.length / 2) + 1)
+      : [],
+    arr.slice(0, Math.trunc(arr.length / 2))
+  );
 
 module.exports = {
   getIntervalArray,
